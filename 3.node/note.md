@@ -25,3 +25,24 @@ close callbacks
 我们需要关心的 timer poll check
 nextTick 和promise.then都是微任务 但是nextTick的级别更高一些，nextTick会在当前执行栈中的代码执行完毕后 立即调用
 
+---------代码调试----------
+1.可以直接node --inspect-brk 文件名 实现调试功能 借助浏览器来调试
+然后在浏览器输入chrome://inspect打开即可
+使用文档链接：https://nodejs.org/zh-cn/docs/guides/debugging-getting-started/
+2.vscode调试源码  nodej调试源码 必须创建一个json文件 默认需要取消internal_files否则无法调试源代码
+跳到下一个断点  单步跳过（不进入方法中） 进入方法中 离开方法
+
+---------require-------------
+1.Module.prototype.require require方法是定义在模块原型上的
+2.Module._load 加载模块
+3.Modeule._resolveFilename 解析出绝对路径 并且添加后缀
+4.new Module 创建一个模块 该实例具有id 文件名 exports是一个对象 存放的是模块导出的结果 
+5.module.load 加载模块
+6.Module._extensions 存放着不同后缀文件的处理
+
+最终返回的是module.exports
+模块导出不能使用 exports = xxxx , 可以使用exports.a  module.exports.a this.a
+---------require查找规则------------
+默认会优先查找 当前文件夹下的js文件 --> json文件 --> 同名文件夹下的 查找package.json 中 main字段 的文件，如果没有就会查找index.js
+如果文件不是绝对路径或者相对路径（不是核心模块）会去当前文件夹下的node_modules 下查找
+如果当前node_modules找不到会继续向上查找 ，直到根目录位置 ，找不到就会报错
