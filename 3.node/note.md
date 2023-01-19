@@ -14,4 +14,14 @@ env 当前系统环境变量 如果是windows 可以使用 set xxx = xxx 如果�
 如果不区分系统环境可以安装第三方模块 用于设置环境变量
 argv获取运行代码时传入的参数 --port --confi 返回的是一个数组，数组的索引第0个是node执行程序的位置 第二位是执行的文件的路径 后面才是命令的参数  也可以使用第三方插件 commander解析用户传递的参数
 
+--------node事件环---------
+node中也有一个事件环，包含了i/o操作， node在版本10之后执行顺序就和浏览器一致了
+timers 定时器 
+pengding callbacks 上一轮没有执行完的回调，node中有个最大执行个数，超过的部分放到下一轮
+idle, prepare 内部系统使用的队列
+poll 轮询，i/o相关操作的回调，会在特定的时候进行阻塞
+check setImmediate的回调
+close callbacks
+我们需要关心的 timer poll check
+nextTick 和promise.then都是微任务 但是nextTick的级别更高一些，nextTick会在当前执行栈中的代码执行完毕后 立即调用
 
