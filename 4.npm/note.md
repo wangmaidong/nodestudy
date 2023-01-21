@@ -52,6 +52,22 @@
 
 ③无 指定版本
 
+11.scripts + npx 包发布 （会默认将当前node_modules下的.bin目录放到全局）只有在运行scripts或者npx
+
+当前目录可以使用 运行后就会删除
+
+12.npx 比scripts的好处是如果模块不存在会安装 安装后会被销毁表示安装时采用最新的包来安装
+
+13.发包 
+
+①nrm use npm 下载源切换为npm 的官方地址
+
+②npm addUser 登录用户
+
+③npm publish  发布包
+
+④代码更新要修改version 重新提交
+
 
 
 
